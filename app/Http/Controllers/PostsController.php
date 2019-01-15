@@ -49,10 +49,14 @@ class PostsController extends Controller
     }
     function update($id, Request $request) {
         $post=Post::find($id);
-        self::validateRequest($request);
         $post->title=$request->title;
         $post->content=$request->content;
         $post->save();
         return redirect()->route('posts');
+    }
+
+    function view_details($id, $title){
+        $post=Post::find($id);
+        return view('details')->withPost($post);
     }
 }
